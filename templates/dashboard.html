@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">
+        Tutor Booking Dashboard
+        <a href="{{ url_for('index') }}" class="btn btn-secondary float-right">Home</a>
+    </h1>
+
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Total Bookings</h5>
+                    <p class="card-text display-4">{{ events|length }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="mb-3">Recent Bookings</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Course Name</th>
+                    <th>Start Date</th>
+                    <th>Number of Students</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in events[:5] %}
+                    <tr>
+                        <td>{{ event.full_name }}</td>
+                        <td>{{ event.email }}</td>
+                        <td>{{ event.course_name }}</td>
+                        <td>{{ event.start_date }}</td>
+                        <td>{{ event.student_count }}</td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<style>
+    .card {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: 0.3s;
+    }
+    .card:hover {
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    .table-responsive {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .btn-secondary {
+        margin-right: 10px;
+    }
+</style>
+{% endblock %}
